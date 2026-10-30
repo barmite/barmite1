@@ -1,85 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Connect with Me</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      background-attachment: fixed;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .container {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 40px 30px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      text-align: center;
-      max-width: 400px;
-    }
-    h2 {
-      margin-top: 0;
-      color: #333;
-    }
-    .social-list {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      flex-wrap: wrap;
-      list-style: none;
-      padding: 0;
-      margin: 20px 0 0 0;
-    }
-    .social-list a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: #333;
-      font-size: 14px;
-    }
-    .social-list img {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 8px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h2>Login with</h2>
-    <ul class="social-list">
-      <li>
-        <a href="https://accounts.google.com/signin" target="_blank">
-          <img src="https://www.google.com/favicon.ico" alt="Google">
-          Gmail
-        </a>
-      </li>
-      <li>
-        <a href="https://login.yahoo.com" target="_blank">
-          <img src="https://www.yahoo.com/favicon.ico" alt="Yahoo">
-          Yahoo
-        </a>
-      </li>
-      <li>
-        <a href="https://login.live.com" target="_blank">
-          <img src="https://outlook.live.com/favicon.ico" alt="Outlook">
-          Outlook
-        </a>
-      </li>
-      <li>
-        <a href="https://login.aol.com" target="_blank">
-          <img src="https://www.aol.com/favicon.ico" alt="AOL">
-          AOL
-        </a>
-      </li>
-    </ul>
-  </div>
-</body>
-</html>
+<ul class="social-list">
+  <li>
+    <a href="https://accounts.google.com/signin" target="_blank">
+      <img src="https://www.google.com/favicon.ico" alt="Google">
+      Gmail
+    </a>
+  </li>
+  <li>
+    <a href="https://login.yahoo.com" target="_blank">
+      <img src="https://www.yahoo.com/favicon.ico" alt="Yahoo">
+      Yahoo
+    </a>
+  </li>
+  <li>
+    <a href="https://login.live.com" target="_blank">
+      <img src="https://outlook.live.com/favicon.ico" alt="Outlook">
+      Outlook
+    </a>
+  </li>
+  <li>
+    <a href="https://login.aol.com" target="_blank">
+      <img src="https://www.aol.com/favicon.ico" alt="AOL">
+      AOL
+    </a>
+  </li>
+</ul>
+
+<form id="inviteForm">
+  <input type="text" name="name" placeholder="Full Name" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <input type="tel" name="phone" placeholder="Phone Number">
+  <textarea name="message" placeholder="Your message" rows="4"></textarea>
+  <button type="submit">Submit</button>
+</form>
+
+<div class="spinner" id="spinner"></div>
+<div id="status"></div>
