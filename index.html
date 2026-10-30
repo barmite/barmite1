@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=“en”>
 <head>
-  <meta charset="UTF-8">
+  <meta charset=“UTF-8”>
   <title>Invitation Form</title>
   <style>
     body {
@@ -33,56 +33,85 @@
       text-align: center;
       font-weight: bold;
     }
+    .social {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .social h3 {
+      margin-bottom: 15px;
+    }
+    .social a {
+      display: inline-block;
+      margin: 6px;
+      padding: 10px 16px;
+      background: #0088cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    .social a:hover {
+      background: #006699;
+    }
   </style>
 </head>
 <body>
-  <h2>You're Invited!</h2>
-  <form id="inviteForm">
-    <input type="text" name="name" placeholder="Full Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="tel" name="phone" placeholder="Phone Number">
-    <select name="guests" required>
-      <option value="">Number of guests</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4+">4 or more</option>
+  <h2>You’re Invited!</h2>
+  <form id=“inviteForm”>
+    <input type=“text” name=“name” placeholder=“Full Name” required>
+    <input type=“email” name=“email” placeholder=“Email” required>
+    <input type=“tel” name=“phone” placeholder=“Phone Number”>
+    <select name=“guests” required>
+      <option value=“”>Number of guests</option>
+      <option value=“1”>1</option>
+      <option value=“2”>2</option>
+      <option value=“3”>3</option>
+      <option value=“4+”>4 or more</option>
     </select>
-    <textarea name="message" placeholder="Any message or special requests?" rows="4"></textarea>
-    <button type="submit">Submit RSVP</button>
+    <textarea name=“message” placeholder=“Any message or special requests?” rows=“4”></textarea>
+    <button type=“submit”>Submit RSVP</button>
   </form>
-  <div id="status"></div>
+  <div id=“status”></div>
+
+  <!— Social Apps —>
+  <div class=“social”>
+    <h3>Connect with me</h3>
+    <a href=“https://mail.google.com” target=“_blank”>Google</a>
+    <a href=“https://mail.yahoo.com” target=“_blank”>Yahoo</a>
+    <a href=“https://outlook.live.com” target=“_blank”>Outlook</a>
+    <a href=“https://mail.aol.com” target=“_blank”>AOL</a>
+  </div>
 
   <script>
-    document.getElementById("inviteForm").addEventListener("submit", async (e) => {
+    document.getElementById(“inviteForm”).addEventListener(“submit”, async (e) => {
       e.preventDefault();
-      const status = document.getElementById("status");
-      status.textContent = "Sending...";
-      status.style.color = "black";
+      const status = document.getElementById(“status”);
+      status.textContent = “Sending...”;
+      status.style.color = “black”;
 
       const formData = new FormData(e.target);
       const data = Object.fromEntries(formData);
 
       try {
-        const res = await fetch("/.netlify/functions/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+        const res = await fetch(“/.netlify/functions/submit”, {
+          method: “POST”,
+          headers: { “Content-Type”: “application/json” },
           body: JSON.stringify(data),
         });
 
         const result = await res.json();
 
         if (res.ok && result.success) {
-          status.textContent = "Thank you! Your response has been received.";
-          status.style.color = "green";
+          status.textContent = “Thank you! Your response has been received.”;
+          status.style.color = “green”;
           e.target.reset();
         } else {
-          status.textContent = "Something went wrong. Please try again.";
-          status.style.color = "red";
+          status.textContent = “Something went wrong. Please try again.”;
+          status.style.color = “red”;
         }
       } catch (err) {
-        status.textContent = "Error sending form. Please try again.";
-        status.style.color = "red";
+        status.textContent = “Error sending form. Please try again.”;
+        status.style.color = “red”;
       }
     });
   </script>
