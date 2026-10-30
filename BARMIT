@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invitation Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    h2 { text-align: center; }
+    input, textarea, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background: #0088cc;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover { background: #006699; }
+    #status {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>You're Invited!</h2>
+  <form id="inviteForm">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="tel" name="phone" placeholder="Phone Number">
+    <select name="guests" required>
+      <option value="">Number of guests</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4+">4 or more</option>
+    </select>
+    <textarea name="message" placeholder="Any message or special requests?" rows="4"></textarea>
+    <button type="submit">Submit RSVP</button>
+  </form>
+  <div id="status"></div>
+
+  <script>
+    document.getElementById("inviteForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const status = document.getElementById("status");
+      status.textContent = "Sending...";
+      status.style.color = "black";
+
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+
+      try {
+        const res = await fetch("/.netlify/functions/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        const result = await res.json();
+
+        if (res.ok && result.success) {
+          status.textContent = "Thank you! Your response has been received.";
+          status.style.color = "green";
+          e.target.reset();
+        } else {
+          status.textContent = "Something went wrong. Please try again.";
+          status.style.color = "red";
+        }
+      } catch (err) {
+        status.textContent = "Error sending form. Please try again.";
+        status.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>
+exports.handler = async (event) => {
+  if (event.httpMethod !== "POST") {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: "Method Not Allowed" }),
+    };
+  }
+  try {
+    const data = JSON.parse(event.body || "{}");
+    const { name, email, phone, guests, message } = data;
+    if (!name || !email) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "Name and email are required" }),
+      };
+    }
+    const text = `
+New Invitation Response
+Name: ${name}
+Email: ${email}
+Phone: ${phone || "Not provided"}
+Guests: ${guests || "Not specified"}
+Message: ${message || "None"}
+    `.trim();
+    const telegramUrl = `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`;
+    const response = await fetch(telegramUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: process.env.CHAT_ID,
+        text: text,
+      }),
+    });
+    const tgResult = await response.json();
+    if (!response.ok || !tgResult.ok) {
+      console.error("Telegram error:", tgResult);
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: "Failed to send to Telegram" }),
+      };
+    }
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ success: true }),
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Server error" }),
+    };
+  }
+};
