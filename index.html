@@ -2,63 +2,39 @@
 <html lang=“en”>
 <head>
   <meta charset=“UTF-8”>
-  <title>Invitation Form</title>
+  <title>Connect with Me</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 500px;
-      margin: 40px auto;
-      padding: 20px;
+      margin: 0;
+      padding: 0;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       background-attachment: fixed;
       min-height: 100vh;
-      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .container {
       background: rgba(255, 255, 255, 0.95);
-      padding: 30px;
+      padding: 40px 30px;
       border-radius: 15px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    h2 { text-align: center; color: #333; }
-    input, textarea, select, button {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      box-sizing: border-box;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 15px;
-    }
-    button {
-      background: #667eea;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-    }
-    button:hover { background: #5a67d8; }
-    #status {
-      margin-top: 15px;
       text-align: center;
-      font-weight: bold;
+      max-width: 400px;
     }
-    .social {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-    .social h3 {
-      margin-bottom: 15px;
+    h2 {
+      margin-top: 0;
       color: #333;
     }
     .social-list {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 25px;
       flex-wrap: wrap;
       list-style: none;
       padding: 0;
+      margin: 20px 0 0 0;
     }
     .social-list a {
       display: flex;
@@ -69,94 +45,41 @@
       font-size: 14px;
     }
     .social-list img {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 5px;
+      width: 50px;
+      height: 50px;
+      margin-bottom: 8px;
     }
   </style>
 </head>
 <body>
   <div class=“container”>
-    <!— Social Apps at the top —>
-    <div class=“social”>
-      <h3>Connect with me</h3>
-      <ul class=“social-list”>
-        <li>
-          <a href=“https://mail.google.com” target=“_blank”>
-            <img src=“https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/120px-Google_%22G%22_logo.svg.png” alt=“Google”>
-            Google
-          </a>
-        </li>
-        <li>
-          <a href=“https://mail.yahoo.com” target=“_blank”>
-            <img src=“https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Yahoo%21_logo.svg/120px-Yahoo%21_logo.svg.png” alt=“Yahoo”>
-            Yahoo
-          </a>
-        </li>
-        <li>
-          <a href=“https://outlook.live.com” target=“_blank”>
-            <img src=“https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg/120px-Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg.png” alt=“Outlook”>
-            Outlook
-          </a>
-        </li>
-        <li>
-          <a href=“https://mail.aol.com” target=“_blank”>
-            <img src=“https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/AOL_logo_%282009%29.svg/120px-AOL_logo_%282009%29.svg.png” alt=“AOL”>
-            AOL
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <h2>You’re Invited!</h2>
-    <form id=“inviteForm”>
-      <input type=“text” name=“name” placeholder=“Full Name” required>
-      <input type=“email” name=“email” placeholder=“Email” required>
-      <input type=“tel” name=“phone” placeholder=“Phone Number”>
-      <select name=“guests” required>
-        <option value=“”>Number of guests</option>
-        <option value=“1”>1</option>
-        <option value=“2”>2</option>
-        <option value=“3”>3</option>
-        <option value=“4+”>4 or more</option>
-      </select>
-      <textarea name=“message” placeholder=“Any message or special requests?” rows=“4”></textarea>
-      <button type=“submit”>Submit RSVP</button>
-    </form>
-    <div id=“status”></div>
+    <h2>Send me information</h2>
+    <ul class=“social-list”>
+      <li>
+        <a href=“https://mail.google.com/mail/?view=cm&fs=1&to=YOUR-EMAIL@gmail.com” target=“_blank”>
+          <img src=“https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/120px-Google_%22G%22_logo.svg.png” alt=“Google”>
+          Google
+        </a>
+      </li>
+      <li>
+        <a href=“https://compose.mail.yahoo.com/?to=YOUR-EMAIL@yahoo.com” target=“_blank”>
+          <img src=“https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Yahoo%21_logo.svg/120px-Yahoo%21_logo.svg.png” alt=“Yahoo”>
+          Yahoo
+        </a>
+      </li>
+      <li>
+        <a href=“https://outlook.live.com/mail/0/deeplink/compose?to=YOUR-EMAIL@outlook.com” target=“_blank”>
+          <img src=“https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg/120px-Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg.png” alt=“Outlook”>
+          Outlook
+        </a>
+      </li>
+      <li>
+        <a href=“https://mail.aol.com/webmail-std/en-us/suite” target=“_blank”>
+          <img src=“https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/AOL_logo_%282009%29.svg/120px-AOL_logo_%282009%29.svg.png” alt=“AOL”>
+          AOL
+        </a>
+      </li>
+    </ul>
   </div>
-
-  <script>
-    document.getElementById(“inviteForm”).addEventListener(“submit”, async (e) => {
-      e.preventDefault();
-      const status = document.getElementById(“status”);
-      status.textContent = “Sending...”;
-      status.style.color = “black”;
-
-      const formData = new FormData(e.target);
-      const data = Object.fromEntries(formData);
-
-      try {const res = await fetch(“/.netlify/functions/submit”, {
-          method: “POST”,
-          headers: { “Content-Type”: “application/json” },
-          body: JSON.stringify(data),
-        });
-
-        const result = await res.json();
-
-        if (res.ok && result.success) {
-          status.textContent = “Thank you! Your response has been received.”;
-          status.style.color = “green”;
-          e.target.reset();
-        } else {
-          status.textContent = “Something went wrong. Please try again.”;
-          status.style.color = “red”;
-        }
-      } catch (err) {
-        status.textContent = “Error sending form. Please try again.”;
-        status.style.color = “red”;
-      }
-    });
-  </script>
 </body>
 </html>
